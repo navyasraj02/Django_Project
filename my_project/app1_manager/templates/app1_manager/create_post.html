@@ -1,5 +1,17 @@
-<form method="post" enctype="multipart/form-data">
+{% extends 'base.html' %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Create Post</h2>
+<form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
+    <input type="text" name="title" placeholder="Title">
+    <input type="file" name="image">
+    <input type="submit" value="Create">
 </form>
+{% else %}
+<p>Please login to create a post.</p>
+{% endif %}
+{% endblock %}
