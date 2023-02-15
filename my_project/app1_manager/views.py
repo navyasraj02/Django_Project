@@ -8,11 +8,13 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            print("Heeloooi")
+
             return redirect('app1_manager:posts')
     else:
         form = PostForm()
